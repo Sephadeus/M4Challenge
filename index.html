@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Coding Quiz</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+  <body>
+    <button class="btn" id="highScores">Click Here to View High Scores</button>
+    <header id="title">
+      <div class="card" id="title-content">
+            <h1>The Quizzer</h1>
+            <p>This quiz will help you assess your coding knowledge. Answer every question before the time runs out.</p>
+            <br>
+            <p class="warning">Beware: Wrong answers will deduct time from the countdown.</p>
+            <br>
+            <hr>
+            <br>
+            <button class="btn" id="start-btn">Start Quiz!</button>
+        </div>
+      
+    </header>
+    <main>
+
+    <div class="card" id="quiz-content">
+         
+            <h2 id="questionArea">Question:<span id="question"></span></h2>
+        <div id="answers">
+            <button class="btn choice" id="option">A: <span id="A"></span></button>
+            <button class="btn choice" id="option">B: <span id="B"></span></button>
+            <button class="btn choice" id="option">C: <span id="C"></span></button>
+            <button class="btn choice" id="option">D: <span id="D"></span></button>
+        </div>
+        <h2 id="correctOrNot"></h2>
+        <div id="timer">
+        <span id="timeLeft"></span>
+      </div>
+
+    </div>
+    
+    <div class="card" id="gameOver">
+      <h2 id="bigLetters">GAME OVER.</h2>
+      <p>You lost. Be better.</p>
+      <button class="btn" id="playAgain">Play Again?</button>
+    </div>
+
+    <div class="card" id="youWin">
+      <h2 id="bigLetters">YOU WON!</h2>
+      <p>The world greets its newest champion!</p>
+      <form>
+        <input type="text" id="highScoreInput" name="highScore" placeholder="Your initials here">
+        <button class="btn submit">Submit</button>
+      </form>
+      <button class="btn" id="playAgain">Play Again?</button>
+    </div>
+
+
+    </main>
+    <script src="./script.js"></script>
+  </body>
+</html>
