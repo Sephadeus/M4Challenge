@@ -7,8 +7,11 @@
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body>
-    <button class="btn" id="highScores">Click Here to View High Scores</button>
-    <header id="title">
+    
+   <button class="btn" id="viewScores">Click Here to View High Scores</button>
+
+    <header id="title"> 
+      
       <div class="card" id="title-content">
             <h1>The Quizzer</h1>
             <p>This quiz will help you assess your coding knowledge. Answer every question before the time runs out.</p>
@@ -27,10 +30,10 @@
          
             <h2 id="questionArea">Question:<span id="question"></span></h2>
         <div id="answers">
-            <button class="btn choice" id="option">A: <span id="A"></span></button>
-            <button class="btn choice" id="option">B: <span id="B"></span></button>
-            <button class="btn choice" id="option">C: <span id="C"></span></button>
-            <button class="btn choice" id="option">D: <span id="D"></span></button>
+            <button class="btn choice" id="A" value="A"><span id="A"></span></button>
+            <button class="btn choice" id="B" value="B"><span id="B"></span></button>
+            <button class="btn choice" id="C" value="C"><span id="C"></span></button>
+            <button class="btn choice" id="D" value="D"><span id="D"></span></button>
         </div>
         <h2 id="correctOrNot"></h2>
         <div id="timer">
@@ -50,9 +53,19 @@
       <p>The world greets its newest champion!</p>
       <form>
         <input type="text" id="highScoreInput" name="highScore" placeholder="Your initials here">
-        <button class="btn submit">Submit</button>
+        <button class="btn submit" id="submit">Submit</button>
       </form>
       <button class="btn" id="playAgain">Play Again?</button>
+    </div>
+
+    <button class="btn" id="backBtn">Click Here to Go Back</button>
+    <div id="highScoreList">
+      
+      <h2>Scores</h2>
+      <br>
+      <ol id="scores">
+
+      </ol>
     </div>
 
 
