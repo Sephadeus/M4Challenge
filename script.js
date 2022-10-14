@@ -193,8 +193,9 @@ function viewScores() {
     console.log(scores)
       console.log(scores.length)
 
-    for (let i = 0; i < scores.length; i++) {
+    for (let i = 0; i < 10; i++) {
       console.log(scores[i].name);
+      console.log(scoresEl.childElementCount)
       if (scoresEl.childElementCount < scores.length){
         var listItem = document.createElement('li');
         console.log("Name: " + scores[i].name + ", Score: " + scores[i].score)
