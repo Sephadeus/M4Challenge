@@ -132,22 +132,18 @@ localStorage.setItem("scores", JSON.stringify(saved));
 });
 
 function playAgain() {
- 
-i = 0; 
-console.log(i);
- score = 0;
- console.log(score)
-  startQuiz();
+  window.location.reload();
 }
 //Adds event listener to play again button for player
 playAgainEl.addEventListener("click", playAgain);
-playAgain2El.addEventListener("click", playAgain);
+//playAgain2El.addEventListener("click", playAgain);
 //Adds event listener to start quiz
 startBtnEl.addEventListener("click", startQuiz);
 
 //Displays the victory screen
 function youWin() {
   console.log(i)
+
   quizContentEl.style.display = "none";
   youWinEl.style.display = "flex";
   currentScoreEl.textContent = "Your score is: " + score;
@@ -169,6 +165,7 @@ let showQuiz = function() {
 backBtnEl.addEventListener("click", returnHome);
 
 function returnHome() {
+  window.location.reload();
   scoreListEl.style.display = "none";
   titleEl.style.display = "flex";
   backBtnEl.style.display = "none";
@@ -213,12 +210,21 @@ function viewScores() {
 
 
 function nextQuestion() {
+  if (i < questions.length){
+        questionEl.textContent = questions[i].question;
+        choice1El.textContent = questions[i].A;
+        choice2El.textContent = questions[i].B;
+        choice3El.textContent = questions[i].C;
+        choice4El.textContent = questions[i].D;
+       } else {
+        i = 0;
         questionEl.textContent = questions[i].question;
         choice1El.textContent = questions[i].A;
         choice2El.textContent = questions[i].B;
         choice3El.textContent = questions[i].C;
         choice4El.textContent = questions[i].D;
        }
+      }
 
        function clearQuestion() {
         questionEl.textContent = "";
@@ -278,5 +284,5 @@ function checkAnswer(event) {
   console.log(score);
   cardTime();
 } 
-}
+ }
 };
