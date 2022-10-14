@@ -14,9 +14,10 @@ const youWinEl = document.getElementById("youWin");
 const viewScoresEl = document.getElementById("viewScores");
 const scoresEl = document.getElementById("scores");
 const currentScoreEl = document.getElementById("currentScore");
-const highScoreInputEl = document.querySelector("#highScore");
+const highScoreInputEl = document.querySelector("#highScoreInput");
 const correctOrNotEl = document.getElementById("correctOrNot");
 const playAgainEl = document.getElementById("playAgain");
+const playAgain2El = document.getElementById("playAgain2");
 const submitEl = document.getElementById("submit");
 const scoreListEl = document.getElementById("highScoreList");
 const backBtnEl = document.getElementById("backBtn");
@@ -58,33 +59,21 @@ function cardTime() {
   cardTimeLeft = 1;
  
   var cardTimer = setInterval(function() {
- 
-    if(cardTimeLeft > 0) {
- 
-      cardTimeLeft--;
- 
-    } else if (i == questions.length - 1){
- 
-      clearInterval(cardTimer);
-    clearInterval(timer);
-    correctOrNotEl.textContent = "";
-    timerEl.textContent = "";
-    youWin();
-  }
- 
-  else {
+  if (i < questions.length) {
+  if(cardTimeLeft > 0) {
+          cardTimeLeft--;
+      }
+     else {
       clearInterval(cardTimer);
       correctOrNotEl.textContent = "";
-      i++;
-
-      questionEl.textContent = questions[i].question;
-        choice1El.textContent = questions[i].A;
-        choice2El.textContent = questions[i].B;
-        choice3El.textContent = questions[i].C;
-        choice4El.textContent = questions[i].D;
-    }
-  }, 1000)
-}
+      nextQuestion();
+     }
+  } else if (i >= questions.length) {
+    clearInterval(cardTimer);
+    youWin();
+  }
+    } , 1000) 
+};
 
 //Displays the quiz timer
 function setTime() {
@@ -97,7 +86,7 @@ function setTime() {
           else if (timeLeft === 1) {
             timeLeftEl.textContent = "Time remaining: " + timeLeft + " second.";
             timeLeft--;
-          } else if (timeLeft <= 0) {
+          } else {
             clearInterval(timer);
             timeLeftEl.textContent = "";
             correctOrNotEl.textContent = "";
@@ -108,55 +97,71 @@ function setTime() {
     
 //Displays the game over screen
 function gameOver() {
+  
     quizContentEl.style.display = "none";
+    youWinEl.style.display = "none";
     gameOverEl.style.display = "flex";
 }
 
 
 //Calculates score and submits it to local storage along with user initials
-let score;
-var scorerProfile;
-let highScorers= [];
+var score = 0;
+
+var highScorers= [];
 
 submitEl.addEventListener("click", function handleSubmit(event) {
   event.preventDefault();
-  JSON.parse(localStorage.getItem("scores"));
-  console.log(localStorage.getItem("scores"));
-// Create user object from submission
+
+var saved = JSON.parse(localStorage.getItem("scores"))
+console.log(saved)
+  // Create user object from submission
 var scorerProfile = {
-  name: highScoreInputEl.value.trim(),
+  name: highScoreInputEl.value,
   score: score
 }
 
-highScorers.push(scorerProfile);
-localStorage.setItem("scores", JSON.stringify(scorerProfile));
+saved.push(scorerProfile);
+localStorage.setItem("scores", JSON.stringify(saved));
   //Pushes profile to the high scorer array
-  console.log(highScoreInputEl.value);
-  console.log(scorerProfile);
 
+  console.log(scorerProfile);
+  console.log(saved);
+  
   viewScores();
-  event.stopPropagation();
+
 });
 
+function playAgain() {
+ 
+i = 0; 
+console.log(i);
+ score = 0;
+ console.log(score)
+  startQuiz();
+}
+//Adds event listener to play again button for player
+playAgainEl.addEventListener("click", playAgain);
+playAgain2El.addEventListener("click", playAgain);
+//Adds event listener to start quiz
+startBtnEl.addEventListener("click", startQuiz);
+
 //Displays the victory screen
-function youWin(score) {
+function youWin() {
+  console.log(i)
   quizContentEl.style.display = "none";
   youWinEl.style.display = "flex";
   currentScoreEl.textContent = "Your score is: " + score;
 }
 
-//Adds event listener to play again button for player
-playAgainEl.addEventListener("click", startQuiz);
-
-//Adds event listener to start quiz
-startBtnEl.addEventListener("click", startQuiz);
     
 //Display only the quiz and hide any possible open windows
 let showQuiz = function() {
-  youWinEl.style.display = "none";
+  correctOrNotEl.textContent = "";
+  youWinEl.style.display = "none";                    
     gameOverEl.style.display = "none"; 
   titleEl.style.display = "none";
   viewScoresEl.style.display = "none";
+  backBtnEl.style.display = "flex"
     quizContentEl.style.display = "flex";
 }
 
@@ -168,82 +173,110 @@ function returnHome() {
   titleEl.style.display = "flex";
   backBtnEl.style.display = "none";
   viewScoresEl.style.display = "block";
+  quizContentEl.style.display = "none"
+  youWinEl.style.display = "none";
+  gameOverEl.style.display = "none";
 }
 
 //Allows the user to view the current high scores
 viewScoresEl.addEventListener("click", viewScores);
 
 function viewScores() {
-backBtnEl.style.display = "flex";
- viewScoresEl.style.display = "none";
- youWinEl.style.display = "none";
- gameOverEl.style.display = "none"; 
- titleEl.style.display = "none";
- quizContentEl.style.display = "none";
- scoreListEl.style.display = "flex";
+
+    backBtnEl.style.display = "flex";
+        viewScoresEl.style.display = "none";
+          youWinEl.style.display = "none";
+            gameOverEl.style.display = "none"; 
+              titleEl.style.display = "none";
+               quizContentEl.style.display = "none";
+                 scoreListEl.style.display = "flex";
  
 
-let scores = localStorage.getItem("scores");
-console.log(scores)
+    let scores = JSON.parse(localStorage.getItem("scores"));
+    console.log(scores)
+      console.log(scores.length)
 
-for (let score in scores) {
-   var listItem = document.createElement('li');
-   listItem.textContent = this.score;
-   scoresEl.appendChild(listItem);
-}
-};
-      
+    for (let i = 0; i < scores.length; i++) {
+      console.log(scores[i].name);
+      if (scoresEl.childElementCount < scores.length){
+        var listItem = document.createElement('li');
+        console.log("Name: " + scores[i].name + ", Score: " + scores[i].score)
+         listItem.textContent = "Name: " + scores[i].name + ", Score: " + scores[i].score;
+           scoresEl.appendChild(listItem);
+          } 
+
+      }
+    };
+
+     
 //Initializes the index variable and starts the quiz
-var i = 0;
-function startQuiz() {
-  
-  //Hides other windows and presents the question and possible answers
-    showQuiz();
 
-    //Sets the clock
-    setTime();
 
-    //Tracks how many questions have been answered and displays the multiple choices in their respective containers
-    let answered = 0;
+function nextQuestion() {
         questionEl.textContent = questions[i].question;
         choice1El.textContent = questions[i].A;
         choice2El.textContent = questions[i].B;
         choice3El.textContent = questions[i].C;
         choice4El.textContent = questions[i].D;
+       }
 
+       function clearQuestion() {
+        questionEl.textContent = "";
+        choice1El.textContent = "";
+        choice2El.textContent = "";
+        choice3El.textContent = "";
+        choice4El.textContent = "";
+       }
+
+
+var i;
+function startQuiz() {
+score = 0;
+i = 0;
+console.log(i);
+console.log(score);
+
+  //Hides other windows and presents the question and possible answers
+    showQuiz();
+
+    //Sets the clock
+    setTime();
+   
+    
+    //Tracks how many questions have been answered and displays the multiple choices in their respective containers
+    
+    choice1El.addEventListener("click", checkAnswer);
+    choice2El.addEventListener("click", checkAnswer);
+    choice3El.addEventListener("click", checkAnswer);
+    choice4El.addEventListener("click", checkAnswer); 
+    nextQuestion();
         //Checks whether the value of the event target is true or not
 function checkAnswer(event) {
   var selected = event.target;
+  
 
-  if (i < questions.length && timeLeft > 0) {
+  if (i < questions.length) {
+    console.log(selected.value, questions[i].correct)
       if (selected.value == questions[i].correct){
         correctOrNotEl.textContent = "Great job, that is correct!";
+        i++;
+        score += Math.floor(timeLeft + 1000/questions.length);
+        console.log(score)
         cardTime();
-        answered++;
         }
         else if (timeLeft > 5 && selected.value != questions[i].correct) {
-        correctOrNotEl.textContent = "Try again."
-        timeLeft -= 5;
+          correctOrNotEl.textContent = "Sorry, try again."
+           timeLeft -= 5;
+           cardTime();
         } else if (timeLeft < 5 && selected.value != questions[i].correct ) {
-          correctOrNotEl.textContent = "Try again."
+          correctOrNotEl.textContent = "Sorry, try again."
+          cardTime();
         }
-} else if (questions[i] == undefined && timeLeft > 0) {
-  let score = answered*questions.length +timeLeft;
-  console.log(score)
+} else if (i >= questions.length) {
   clearInterval(timer);
-  console.log(answered);
+  score = Math.floor(score + (timeLeft*1000));
   console.log(score);
-  youWin(score);
-} else if (timeLeft == 0) {
-
-  clearInterval(timer);
-  gameOver();
-
+  cardTime();
+} 
 }
-}
-        choice1El.addEventListener("click", checkAnswer);
-        choice2El.addEventListener("click", checkAnswer);
-        choice3El.addEventListener("click", checkAnswer);
-        choice4El.addEventListener("click", checkAnswer);
-
-    };
+};

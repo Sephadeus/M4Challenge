@@ -32,10 +32,16 @@ body {
     text-align: center;
 }
 
+ul {
+    list-style: none;
+    display: block;
+    text-align: center;
+    padding: 20px;
+   
+}
+
 #backBtn {
     display: none;
-    padding: 20px;
-    background-color: red ;
 }
 
 #viewScores {
@@ -47,14 +53,15 @@ body {
     flex-direction: column;
     text-align: center;
     margin: 60px;
-    padding: 30px;
+    padding: 50px;
     min-height: 400px;
-    font-size: 2.5em;
+    font-size: 1em;
     letter-spacing: 2px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: lighter;
     color: white;
     background-image: linear-gradient(to left, gold 0%, black 100%);
+    box-shadow: 5px 5px 15px var(--warning);
 }
 
 .btn {
@@ -62,6 +69,7 @@ body {
     padding: 15px;
     font-weight: bolder;
 }
+
 
 .warning {
     color: var(--warning);
@@ -107,6 +115,14 @@ body {
     cursor: grab;
     background-image: linear-gradient(to right, rgb(42, 45, 192) 0%, rgb(129, 121, 121) 100%);
 }
+
+.choice:active {
+    cursor: grab;
+    background-image: linear-gradient(to right, rgb(227, 117, 255) 0%, rgb(197, 0, 232) 100%);
+    box-shadow: 5px 5px 10px rgb(227, 117, 255);
+}
+
+
 
 #timer {
 margin: auto;
