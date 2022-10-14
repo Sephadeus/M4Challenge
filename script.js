@@ -193,7 +193,7 @@ function viewScores() {
     console.log(scores)
       console.log(scores.length)
 
-    for (let i = 0; i < 10; i++) {
+    for (let i = scores.length - 1; i > scores.length - 10 ; i--) {
       console.log(scores[i].name);
       console.log(scoresEl.childElementCount)
       if (scoresEl.childElementCount < scores.length){
