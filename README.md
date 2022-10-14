@@ -4,7 +4,7 @@
 This project is a coding quiz. The purpose of this project was to utilize the interactivity of JavaScript to help assess aspiring developers' knowledge in a fun way.
 
 ## Visuals
-Check out the screenshot in the related Github repository or visiting this link here --> 
+Check out the screenshot here --> ![2022-10-14 18 05 03 127 0 0 1 84192254dee4](https://user-images.githubusercontent.com/90430093/195951804-40be3f9d-b065-4d58-9364-d9a39c6ca22f.jpg)
 
 ## Installation
 This project is a webpage which requires no installation. Simply click the URL on Github or copy and paste this link --> (https://sephadeus.github.io/M4Challenge/) to navigate to the webpage on the browser.
