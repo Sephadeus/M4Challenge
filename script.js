@@ -112,6 +112,7 @@ var highScorers= [];
 submitEl.addEventListener("click", function handleSubmit(event) {
   event.preventDefault();
 
+  if (JSON.parse(localStorage.getItem("scores")) != undefined) {
 var saved = JSON.parse(localStorage.getItem("scores"))
 console.log(saved)
   // Create user object from submission
@@ -122,6 +123,15 @@ var scorerProfile = {
 
 saved.push(scorerProfile);
 localStorage.setItem("scores", JSON.stringify(saved));
+  } else {
+
+    var scorerProfile = {
+      name: highScoreInputEl.value,
+      score: score
+    }
+    
+    localStorage.setItem("scores", JSON.stringify(saved));
+  }
   //Pushes profile to the high scorer array
 
   console.log(scorerProfile);
@@ -188,14 +198,13 @@ function viewScores() {
                quizContentEl.style.display = "none";
                  scoreListEl.style.display = "flex";
  
-
+if (JSON.parse(localStorage.getItem("scores")) != undefined) {
     let scores = JSON.parse(localStorage.getItem("scores"));
     console.log(scores)
       console.log(scores.length)
 
-    for (let i = scores.length - 1; i > scores.length - 10 ; i--) {
+    for (let i = scores.length - 1; i > scores.length - 10; i--) {
       console.log(scores[i].name);
-      console.log(scoresEl.childElementCount)
       if (scoresEl.childElementCount < scores.length){
         var listItem = document.createElement('li');
         console.log("Name: " + scores[i].name + ", Score: " + scores[i].score)
@@ -204,6 +213,12 @@ function viewScores() {
           } 
 
       }
+    } else {
+      var listItem = document.createElement('li');
+      console.log("Name: " + scores.name + ", Score: " + scores.score)
+       listItem.textContent = "Name: " + scores.name + ", Score: " + scores.score;
+         scoresEl.appendChild(listItem);
+    }
     };
 
      
