@@ -156,7 +156,12 @@ font-size: 20px;
     background-image: radial-gradient(rgb(255, 255, 255) 5%, rgb(3, 6, 184) 100%);
     font-size: 30px;
     font-family: var(--bigLetters);
+    display: none;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 20px;
 }
+
 
 .submit {
     display: inline-block;
@@ -174,11 +179,4 @@ font-size: 20px;
     padding: 20px;
     font-size: 25px;
     cursor: grab;
-}
-
-#youWin {
-    display: none;
-    flex-wrap: wrap;
-    text-align: center;
-    padding: 20px;
 }
