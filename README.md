@@ -1,4 +1,4 @@
-# Module 3 Challenge - Password Generator
+# Module 4 Challenge - Coding Quiz
 
 ## Description
 This project is a coding quiz. The purpose of this project was to utilize the interactivity of JavaScript to help assess aspiring developers' knowledge in a fun way.

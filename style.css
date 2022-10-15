@@ -18,7 +18,9 @@ body {
 .card {
     display: flex;
     flex-direction: column;
-    margin: 30px;
+    margin: auto;
+    justify-content: center;
+    max-width: 500px;
     margin-top: 150px;
     background-color: rgb(44, 44, 44);
     color: white;
@@ -37,7 +39,6 @@ ul {
     display: block;
     text-align: center;
     padding: 20px;
-   
 }
 
 #backBtn {
@@ -48,19 +49,45 @@ ul {
     cursor: grab;
 }
 
+.nameAndScoreList {
+display: flex;
+flex-direction: row;
+width: 100%;
+
+
+}
+
+#names #scores ul {
+    display: block;
+    margin: auto;
+    font-size: 1em;
+    list-style: none;
+    padding: 5px;
+
+    }
+h2{
+    border-bottom: 7px solid #ffbb00;
+    display: inline-block;
+    font-size: 2.5em;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 3px;
+    font-weight: lighter;
+    margin: 20px;
+}
+
 #highScoreList {
+    background: linear-gradient(to left, #a0fffc 0%, #ffbb00 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
     display: none;
     flex-direction: column;
+    justify-content: center;
     text-align: center;
-    margin: 60px;
-    padding: 50px;
-    min-height: 400px;
-    font-size: 1em;
-    letter-spacing: 2px;
-    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-weight: lighter;
-    color: white;
-    background-image: linear-gradient(to left, gold 0%, black 100%);
+    margin: auto;
+    min-height: 600px;
+    font-family:'Arial Narrow Bold', sans-serif;
+    font-weight: bolder;
     box-shadow: 5px 5px 15px var(--warning);
 }
 
@@ -152,6 +179,11 @@ font-size: 20px;
 }
 
 #youWin {
+    display: none;
+    flex-wrap: wrap;
+    text-align: center;
+    padding: 20px;
+    margin-top: 200px;
     color: goldenrod;
     background-image: radial-gradient(rgb(255, 255, 255) 5%, rgb(3, 6, 184) 100%);
     font-size: 30px;
@@ -174,12 +206,4 @@ font-size: 20px;
     padding: 20px;
     font-size: 25px;
     cursor: grab;
-}
-
-#youWin {
-    display: none;
-    flex-wrap: wrap;
-    text-align: center;
-    padding: 20px;
-    margin-top: 200px;
 }

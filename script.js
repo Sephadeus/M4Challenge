@@ -12,6 +12,7 @@ const timeLeftEl = document.getElementById("timeLeft");
 const gameOverEl = document.getElementById("gameOver");
 const youWinEl = document.getElementById("youWin");
 const viewScoresEl = document.getElementById("viewScores");
+const namesEl = document.getElementById("names");
 const scoresEl = document.getElementById("scores");
 const currentScoreEl = document.getElementById("currentScore");
 const highScoreInputEl = document.querySelector("#highScoreInput");
@@ -56,7 +57,7 @@ var cardTimeLeft = 0;
 
 function cardTime() {
  
-  cardTimeLeft = 1;
+  cardTimeLeft = 1.5;
  
   var cardTimer = setInterval(function() {
   if (i < questions.length) {
@@ -70,6 +71,7 @@ function cardTime() {
      }
   } else if (i >= questions.length) {
     clearInterval(cardTimer);
+    score *= 1000 + timeLeft;
     youWin();
   }
     } , 1000) 
@@ -112,7 +114,11 @@ var highScorers= [];
 submitEl.addEventListener("click", function handleSubmit(event) {
   event.preventDefault();
 
-var saved = JSON.parse(localStorage.getItem("scores"))
+  if (highScoreInputEl.value.length > 10) {
+    alert("Input must be less than 10 characters");
+    highScoreInputEl.value = "";
+  } else {
+var saved = JSON.parse(localStorage.getItem("scores"));
 console.log(saved)
   // Create user object from submission
 var scorerProfile = {
@@ -128,7 +134,7 @@ localStorage.setItem("scores", JSON.stringify(saved));
   console.log(saved);
   
   viewScores();
-
+  }
 });
 
 function playAgain() {
@@ -189,18 +195,36 @@ function viewScores() {
                  scoreListEl.style.display = "flex";
  
     let scores = JSON.parse(localStorage.getItem("scores"));
+    
     console.log(scores)
-      console.log(scores.length)
-
-    for (let i = scores.length - 1; i > scores.length-10; i--) {
-      console.log(scores.name);
+    
+    console.log(scores.length)
+        
+      scores.sort((a, b) => {
+             
+        return a.score - b.score;
+        
+      })
+    
+            for (let i = scores.length - 1; i > scores.length-10; i--) {
+      
+              console.log(scores.name);
+      
       if (scoresEl.childElementCount < scores.length){
-        var listItem = document.createElement('li');
-        console.log("Name: " + scores[i].name + ", Score: " + scores[i].score)
-         listItem.textContent = "Name: " + scores[i].name + ", Score: " + scores[i].score;
-           scoresEl.appendChild(listItem);
-          } 
 
+        var nameItem = document.createElement('li');
+        var scoreItem = document.createElement('li');
+        console.log("Name: " + scores[i].name + ", Score: " + scores[i].score)
+        
+        nameItem.textContent = "Name: " + scores[i].name;
+        scoreItem.textContent = "Score: " + scores[i].score;
+       
+        scoresEl.appendChild(scoreItem);
+        namesEl.appendChild(nameItem);
+
+
+          } 
+           
       }
     };
 
@@ -257,31 +281,44 @@ console.log(score);
     nextQuestion();
         //Checks whether the value of the event target is true or not
 function checkAnswer(event) {
+
   var selected = event.target;
-  
 
   if (i < questions.length) {
+
     console.log(selected.value, questions[i].correct)
-      if (selected.value == questions[i].correct){
+     
+    if (selected.value == questions[i].correct){
+       
         correctOrNotEl.textContent = "Great job, that is correct!";
         i++;
-        score += Math.floor(timeLeft + 1000/questions.length);
+        score += Math.floor(1000 + 100/questions.length);
         console.log(score)
         cardTime();
-        }
-        else if (timeLeft > 5 && selected.value != questions[i].correct) {
+        
+      } else if (timeLeft > 5 && selected.value != questions[i].correct) {
+        
           correctOrNotEl.textContent = "Sorry, try again."
-           timeLeft -= 5;
-           cardTime();
-        } else if (timeLeft < 5 && selected.value != questions[i].correct ) {
-          correctOrNotEl.textContent = "Sorry, try again."
+          score -= 100;
+          timeLeft -= 5;
+          console.log(score)
           cardTime();
+        
+        } else if (timeLeft < 5 && selected.value != questions[i].correct ) {
+          
+          correctOrNotEl.textContent = "Sorry, try again."
+          score -= 100;
+          console.log(score)
+          cardTime();
+        
         }
+
 } else if (i >= questions.length) {
+  
   clearInterval(timer);
-  score = Math.floor(score + (timeLeft*1000));
   console.log(score);
   cardTime();
 } 
- }
+ } 
+
 };
