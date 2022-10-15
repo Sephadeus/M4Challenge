@@ -48,7 +48,23 @@ var questions = [
      C: "C: All Properties In",
      D: "D: Application Programming Interface",
      correct: "D"
-     }
+     },
+     {
+      question: "What does HTML stand for?",
+      A: "A: Hiding The Monkey's Laughter",
+      B: "B: Hot Times, Mad Love",
+      C: "C: Hypertext Markup Language",
+      D: "D: Harry The Mechanical Lemur",
+      correct: "C"
+      },
+      {
+        question: "What is debugging?",
+        A: "A: The practice of reviewing code and correcting errors",
+        B: "B: A form of pest extermination",
+        C: "C: 'The Bugging' but said in a French accent",
+        D: "D: None of the above",
+        correct: "A"
+        }
 ]
 
 //Sets interval for question card to pause before displaying the next set
@@ -194,7 +210,7 @@ function viewScores() {
                  scoreListEl.style.display = "flex";
  
     let scores = JSON.parse(localStorage.getItem("scores"));
-            
+
       scores.sort((a, b) => {
              
         return a.score - b.score;
