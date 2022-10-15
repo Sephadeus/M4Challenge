@@ -109,16 +109,16 @@ function gameOver() {
 //Calculates score and submits it to local storage along with user initials
 var score = 0;
 
-var highScorers= [];
+var saved= [];
 
 submitEl.addEventListener("click", function handleSubmit(event) {
   event.preventDefault();
 
-  if (highScoreInputEl.value.length > 10) {
-    alert("Input must be less than 10 characters");
+  if (highScoreInputEl.value.length > 10 || highScoreInputEl.value.length == 0 ) {
+    alert("Input must be between 1 and 10 characters");
     highScoreInputEl.value = "";
   } else {
-var saved = JSON.parse(localStorage.getItem("scores"));
+saved = JSON.parse(localStorage.getItem("scores"));
 console.log(saved)
   // Create user object from submission
 var scorerProfile = {
@@ -208,7 +208,7 @@ function viewScores() {
     
             for (let i = scores.length - 1; i > scores.length-10; i--) {
       
-              console.log(scores.name);
+              console.log(scores[i].name);
       
       if (scoresEl.childElementCount < scores.length){
 

@@ -24,7 +24,7 @@ body {
     margin-top: 150px;
     background-color: rgb(44, 44, 44);
     color: white;
-    border-radius: 5px;
+    border-radius: 25px;
     box-shadow: 5px 5px 15px var(--glow);
     font-family: 'Courier New', Courier, monospace;
 }
@@ -163,9 +163,9 @@ font-size: 20px;
     min-height: 250px;
     padding: 10px;
     color: var(--warning);
+    box-shadow: 5px 5px 15px var(--warning);
     font-size: 25px;
-    border-radius: 0px;
-    margin: 0;
+    margin: auto;
 
 }
 
