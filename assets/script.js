@@ -109,8 +109,6 @@ function gameOver() {
 //Calculates score and submits it to local storage along with user initials
 var score = 0;
 
-var saved = [];
-
 submitEl.addEventListener("click", function handleSubmit(event) {
   event.preventDefault();
 
@@ -118,23 +116,24 @@ submitEl.addEventListener("click", function handleSubmit(event) {
     alert("Input must be between 1 and 10 characters");
     highScoreInputEl.value = "";
   } else {
-saved = JSON.parse(localStorage.getItem("scores"));
-console.log(saved)
+
+let scores = JSON.parse(localStorage.getItem("scores"));
+console.log(scores)
   // Create user object from submission
-var scorerProfile = {};
-  scorerProfile.name = highScoreInputEl.value;
-  scorerProfile.score = score;
+var scorerProfile = {
+  name: highScoreInputEl.value,
+  score: score
 }
 
-saved.push(scorerProfile);
-localStorage.setItem("scores", JSON.stringify(saved));
+scores.push(scorerProfile);
+localStorage.setItem("scores", JSON.stringify(scores));
   //Pushes profile to the high scorer array
 
   console.log(scorerProfile);
-  console.log(saved);
+  console.log(scores);
   
   viewScores();
-  
+}
 });
 
 function playAgain() {
@@ -195,20 +194,14 @@ function viewScores() {
                  scoreListEl.style.display = "flex";
  
     let scores = JSON.parse(localStorage.getItem("scores"));
-    
-    console.log(scores)
-    
-    console.log(scores.length)
-        
+            
       scores.sort((a, b) => {
              
         return a.score - b.score;
         
       })
-    
+    console.log(scores)
             for (let i = scores.length - 1; i > scores.length-10; i--) {
-      
-              console.log(scores[i].name);
       
       if (scoresEl.childElementCount < scores.length){
 
