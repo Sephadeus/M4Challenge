@@ -109,7 +109,7 @@ function gameOver() {
 //Calculates score and submits it to local storage along with user initials
 var score = 0;
 
-var saved= [];
+var saved = [];
 
 submitEl.addEventListener("click", function handleSubmit(event) {
   event.preventDefault();
@@ -121,9 +121,9 @@ submitEl.addEventListener("click", function handleSubmit(event) {
 saved = JSON.parse(localStorage.getItem("scores"));
 console.log(saved)
   // Create user object from submission
-var scorerProfile = {
-  name: highScoreInputEl.value,
-  score: score
+var scorerProfile = {};
+  scorerProfile.name = highScoreInputEl.value;
+  scorerProfile.score = score;
 }
 
 saved.push(scorerProfile);
@@ -134,7 +134,7 @@ localStorage.setItem("scores", JSON.stringify(saved));
   console.log(saved);
   
   viewScores();
-  }
+  
 });
 
 function playAgain() {
